@@ -20,17 +20,9 @@ void UWorldPosition::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//FString Log = TEXT("Hello!");
-	//FString* PrtLog = &Log;
-
-	////int32 Len = Log.Len();
-	////int32 PrtLen = PrtLog->Len(); //(*PrtLog).Len();
-
-	//UE_LOG(LogTemp, Warning, TEXT("%s"), **PrtLog);
-	// ...
-	//FString ActorName = GetOwner()->GetName();
-
-	UE_LOG(LogTemp, Warning, TEXT("Actor name is %s"), *GetOwner()->GetName());
+	FString ObjectName = GetOwner()->GetName();
+	FString ObjectPosition = GetOwner()->GetActorLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%s position in world is %s"), *ObjectName, *ObjectPosition);
 }
 
 
