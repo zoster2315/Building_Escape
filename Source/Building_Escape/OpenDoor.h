@@ -25,6 +25,7 @@ public:
     // Called every frame
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
     void OpenDoor(float DeltaTime) const;
+    void CloseDoor(float DeltaTime) const;
 
 private:
     float OriginalYaw = 0.f;

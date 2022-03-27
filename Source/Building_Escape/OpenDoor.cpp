@@ -1,6 +1,7 @@
 // Copyright Alexey Bekhmatov 2022
 
-
+#include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "OpenDoor.h"
 
 // Sets default values for this component's properties
@@ -26,6 +27,8 @@ void UOpenDoor::BeginPlay()
     {
         UE_LOG(LogTemp, Error, TEXT("%s has OpenDoor componetn but no PressurePlate set"), *GetOwner()->GetName());
     }
+
+    ActorThatOpen = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 
@@ -36,6 +39,8 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
     if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpen))
         OpenDoor(DeltaTime);
+    else
+        CloseDoor(DeltaTime);
 }
 
 void UOpenDoor::OpenDoor(float DeltaTime) const
@@ -45,3 +50,12 @@ void UOpenDoor::OpenDoor(float DeltaTime) const
     FRotator OpenDoor(0, NextYaw, 0);
     GetOwner()->SetActorRotation(OpenDoor);
 }
+
+void UOpenDoor::CloseDoor(float DeltaTime) const
+{
+    float CurrentYaw = GetOwner()->GetActorRotation().Yaw;
+    float NextYaw = FMath::FInterpConstantTo(CurrentYaw, OriginalYaw, DeltaTime, 45);
+    FRotator CloseDoor(0, NextYaw, 0);
+    GetOwner()->SetActorRotation(CloseDoor);
+}
+
