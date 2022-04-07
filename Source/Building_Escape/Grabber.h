@@ -34,5 +34,5 @@ private:
 	void Release();
 	void FindPhysicsHandle();
 	void SetUpInputComponent();
-	AActor* GetActorToGrab() const;
+	FHitResult GetFirstPhysicsBodyInReach() const;
 };
