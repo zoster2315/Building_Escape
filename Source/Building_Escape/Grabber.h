@@ -26,8 +26,9 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	float Reach = 100;
-
+	UPROPERTY()
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+	UPROPERTY()
 	UInputComponent* InputComponent = nullptr;
 
 	void Grab();
@@ -35,4 +36,6 @@ private:
 	void FindPhysicsHandle();
 	void SetUpInputComponent();
 	FHitResult GetFirstPhysicsBodyInReach() const;
+	FVector GetPlayersReach() const;
+	FVector GetPlayerWorldPos() const;
 };
